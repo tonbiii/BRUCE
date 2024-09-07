@@ -32,6 +32,9 @@ header {
     z-index: 100; /* Ensure header is above the container */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
     font-family: "SUSE", sans-serif;
+    color: rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+
 }
 
 header h1 {
