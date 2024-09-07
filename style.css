@@ -13,17 +13,19 @@
 }
 
 body {
-    min-height: 100vh;
+    min-height: 100vh; /* Ensure the body takes at least the full height */
     background: #f6f5f7;
-    display: grid;
-    place-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Poppins', sans-serif;
+    padding: 20px; /* Add padding to ensure content doesn't touch screen edges */
 }
 
 .container {
     position: relative;
-    width: 850px; /* Default width */
-    height: 500px; /* Default height */
+    width: 850px; /* Default width for large screens */
+    height: 500px;
     background-color: #fff;
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
@@ -62,28 +64,28 @@ form {
 
 h1 {
     color: var(--grad-clr1);
-    margin: 0; /* Remove margin to keep text on one line */
-    font-size: 1.5rem; /* Adjust font size */
+    margin: 0;
+    font-size: 1.5rem;
 }
 
 span {
-    font-size: 0.75rem; /* Adjust font size */
-    margin-top: 10px; /* Increased space above the span */
+    font-size: 0.75rem;
+    margin-top: 10px;
 }
 
 .infield {
     position: relative;
-    margin: 12px 0; /* Increased vertical spacing */
+    margin: 12px 0;
     width: 100%;
 }
 
 input {
     width: 100%;
-    padding: 14px 15px; /* Slightly increased padding */
+    padding: 14px 15px;
     background-color: #f3f3f3;
     border: none;
     outline: none;
-    font-size: 1rem; /* Adjust font size */
+    font-size: 1rem;
 }
 
 label {
@@ -103,13 +105,13 @@ input:focus ~ label {
 
 a {
     color: #333;
-    font-size: 0.875rem; /* Adjust font size */
+    font-size: 0.875rem;
     text-decoration: none;
-    margin: 20px 0; /* Increased vertical spacing */
+    margin: 20px 0;
 }
 
 a.forgot {
-    padding-bottom: 5px; /* Increased padding */
+    padding-bottom: 5px;
     border-bottom: 2px solid #eee;
 }
 
@@ -118,15 +120,15 @@ button {
     border: 1px solid var(--grad-clr1);
     background: var(--grad-clr2);
     color: #fff;
-    font-size: 1rem; /* Adjust font size */
+    font-size: 1rem;
     font-weight: bold;
-    padding: 14px 50px; /* Increased padding */
+    padding: 14px 50px;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 .form-container button {
-    margin-top: 15px; /* Reduced space above button */
+    margin-top: 15px;
     transition: 80ms ease-in;
 }
 
@@ -180,16 +182,16 @@ button {
 
 .overlay-panel h1 {
     color: #fff;
-    margin-bottom: 20px; /* Increased space below the heading */
-    font-size: 1.5rem; /* Adjust font size */
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
 p {
-    font-size: 1rem; /* Adjust font size */
+    font-size: 1rem;
     font-weight: 300;
-    line-height: 1.5; /* Increased line height for more spacing */
+    line-height: 1.5;
     letter-spacing: 0.5px;
-    margin: 30px 0; /* Increased vertical spacing */
+    margin: 30px 0;
 }
 
 #signIn, #signUp {
@@ -218,13 +220,12 @@ p {
     transform: translateX(50%);
 }
 
-/* Fix for the overflow issue */
 .overlay-panel.overlay-left {
-    left: 0; /* Ensures the left panel doesn't overflow */
+    left: 0;
 }
 
 .container.right-panel-active .overlay-panel.overlay-left {
-    transform: translateX(0); /* Resets the left panel position */
+    transform: translateX(0);
 }
 
 /* Mobile Styles */
@@ -240,31 +241,33 @@ p {
     }
 
     h1, .overlay-panel h1 {
-        font-size: 1.2rem; /* Adjust font size for mobile */
+        font-size: 1.2rem;
     }
 
     input {
-        font-size: 0.875rem; /* Adjust font size for mobile */
+        font-size: 0.875rem;
     }
 
     button {
-        font-size: 0.875rem; /* Adjust font size for mobile */
-        padding: 12px 30px; /* Adjust padding for mobile */
+        font-size: 0.875rem;
+        padding: 12px 30px;
     }
 
     p {
-        font-size: 0.875rem; /* Adjust font size for mobile */
-        margin: 20px 0; /* Adjust spacing for mobile */
+        font-size: 0.875rem;
+        margin: 20px 0;
     }
 
     a {
-        font-size: 0.75rem; /* Adjust font size for mobile */
+        font-size: 0.75rem;
     }
 }
 
 @media (max-width: 480px) {
     .container {
         width: 100%;
+        padding: 20px;
+        height: auto;
     }
 
     .form-container {
@@ -272,24 +275,24 @@ p {
     }
 
     h1, .overlay-panel h1 {
-        font-size: 1rem; /* Adjust font size for very small screens */
+        font-size: 1rem;
     }
 
     input {
-        font-size: 0.75rem; /* Adjust font size for very small screens */
+        font-size: 0.75rem;
     }
 
     button {
-        font-size: 0.75rem; /* Adjust font size for very small screens */
-        padding: 10px 25px; /* Adjust padding for very small screens */
+        font-size: 0.75rem;
+        padding: 10px 25px;
     }
 
     p {
-        font-size: 0.75rem; /* Adjust font size for very small screens */
-        margin: 15px 0; /* Adjust spacing for very small screens */
+        font-size: 0.75rem;
+        margin: 15px 0;
     }
 
     a {
-        font-size: 0.65rem; /* Adjust font size for very small screens */
+        font-size: 0.65rem;
     }
 }
