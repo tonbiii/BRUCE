@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
 
 * {
     padding: 0;
@@ -20,6 +21,28 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+header {
+    width: 100%;
+    background: var(--grad-clr1); /* Background color same as the gradient color */
+    text-align: center;
+    padding: 20px 0;
+    position: fixed; /* Fixed positioning to stay at the top */
+    top: 0;
+    left: 0;
+    z-index: 100; /* Ensure header is above the container */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
+    font-family: "SUSE", sans-serif;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem; /* Adjust size as needed */
+    text-transform: uppercase;
+    line-height: 1.2; /* Ensure enough space for readability */
+    color: #fff;
+}
+
+
 .container {
     position: relative;
     width: 650px; /* Original width */
@@ -30,6 +53,7 @@ body {
     overflow: hidden;
     transform: scale(0.55); /* Shrink by 50% */
     transform-origin: center;
+    margin-top: 100px;
 }
 
 .form-container {
