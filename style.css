@@ -22,12 +22,13 @@ body {
 
 .container {
     position: relative;
-    width: 850px;
-    height: 500px;
+    width: 850px; /* Default width */
+    height: 500px; /* Default height */
     background-color: #fff;
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
     overflow: hidden;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .form-container {
@@ -62,10 +63,11 @@ form {
 h1 {
     color: var(--grad-clr1);
     margin: 0; /* Remove margin to keep text on one line */
+    font-size: 1.5rem; /* Adjust font size */
 }
 
 span {
-    font-size: 12px;
+    font-size: 0.75rem; /* Adjust font size */
     margin-top: 10px; /* Increased space above the span */
 }
 
@@ -81,7 +83,7 @@ input {
     background-color: #f3f3f3;
     border: none;
     outline: none;
-    font-size: 16px; /* Increased font size for better readability */
+    font-size: 1rem; /* Adjust font size */
 }
 
 label {
@@ -101,7 +103,7 @@ input:focus ~ label {
 
 a {
     color: #333;
-    font-size: 14px;
+    font-size: 0.875rem; /* Adjust font size */
     text-decoration: none;
     margin: 20px 0; /* Increased vertical spacing */
 }
@@ -116,7 +118,7 @@ button {
     border: 1px solid var(--grad-clr1);
     background: var(--grad-clr2);
     color: #fff;
-    font-size: 14px; /* Slightly increased font size */
+    font-size: 1rem; /* Adjust font size */
     font-weight: bold;
     padding: 14px 50px; /* Increased padding */
     letter-spacing: 1px;
@@ -179,12 +181,13 @@ button {
 .overlay-panel h1 {
     color: #fff;
     margin-bottom: 20px; /* Increased space below the heading */
+    font-size: 1.5rem; /* Adjust font size */
 }
 
 p {
-    font-size: 16px; /* Increased font size */
+    font-size: 1rem; /* Adjust font size */
     font-weight: 300;
-    line-height: 24px; /* Increased line height for more spacing */
+    line-height: 1.5; /* Increased line height for more spacing */
     letter-spacing: 0.5px;
     margin: 30px 0; /* Increased vertical spacing */
 }
@@ -222,4 +225,71 @@ p {
 
 .container.right-panel-active .overlay-panel.overlay-left {
     transform: translateX(0); /* Resets the left panel position */
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        height: auto;
+        box-shadow: 10px 15px 30px #5557;
+    }
+
+    .form-container {
+        padding: 0 20px;
+    }
+
+    h1, .overlay-panel h1 {
+        font-size: 1.2rem; /* Adjust font size for mobile */
+    }
+
+    input {
+        font-size: 0.875rem; /* Adjust font size for mobile */
+    }
+
+    button {
+        font-size: 0.875rem; /* Adjust font size for mobile */
+        padding: 12px 30px; /* Adjust padding for mobile */
+    }
+
+    p {
+        font-size: 0.875rem; /* Adjust font size for mobile */
+        margin: 20px 0; /* Adjust spacing for mobile */
+    }
+
+    a {
+        font-size: 0.75rem; /* Adjust font size for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+    }
+
+    .form-container {
+        padding: 0 15px;
+    }
+
+    h1, .overlay-panel h1 {
+        font-size: 1rem; /* Adjust font size for very small screens */
+    }
+
+    input {
+        font-size: 0.75rem; /* Adjust font size for very small screens */
+    }
+
+    button {
+        font-size: 0.75rem; /* Adjust font size for very small screens */
+        padding: 10px 25px; /* Adjust padding for very small screens */
+    }
+
+    p {
+        font-size: 0.75rem; /* Adjust font size for very small screens */
+        margin: 15px 0; /* Adjust spacing for very small screens */
+    }
+
+    a {
+        font-size: 0.65rem; /* Adjust font size for very small screens */
+    }
 }
