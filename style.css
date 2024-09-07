@@ -28,7 +28,7 @@ body {
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
     overflow: hidden;
-    transform: scale(0.5); /* Shrink by 50% */
+    transform: scale(0.55); /* Shrink by 50% */
     transform-origin: center;
 }
 
@@ -102,9 +102,9 @@ input:focus ~ label {
 
 a {
     color: #333;
-    font-size: 14px;
+    font-size: 18px;
     text-decoration: none;
-    margin: 30px 0; /* Increased vertical spacing */
+    margin: 25px 0; /* Increased vertical spacing */
 }
 
 a.forgot {
@@ -117,16 +117,17 @@ button {
     border: 2px solid var(--grad-clr1);
     background: var(--grad-clr2);
     color: #fff;
-    font-size: 14px; /* Slightly increased font size */
+    font-size: 16px; /* Slightly increased font size */
     font-weight: bold;
-    padding: 14px 50px; /* Increased padding */
-    letter-spacing: 1px;
+    padding: 15px 70px; /* Increased padding */
+    letter-spacing: 2px;
     text-transform: uppercase;
 }
 
 .form-container button {
     margin-top: 15px; /* Reduced space above button */
     transition: 80ms ease-in;
+    width: 150%;
 }
 
 .form-container button:hover {
@@ -183,9 +184,9 @@ button {
 }
 
 p {
-    font-size: 16px; /* Increased font size */
+    font-size: 20px; /* Increased font size */
     font-weight: 300;
-    line-height: 24px; /* Increased line height for more spacing */
+    line-height: 50px; /* Increased line height for more spacing */
     letter-spacing: 0.5px;
     margin: 30px 0; /* Increased vertical spacing */
 }
