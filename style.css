@@ -22,12 +22,14 @@ body {
 
 .container {
     position: relative;
-    width: 850px;
-    height: 500px;
+    width: 850px; /* Original width */
+    height: 700px; /* Original height */
     background-color: #fff;
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
     overflow: hidden;
+    transform: scale(0.5); /* Shrink by 50% */
+    transform-origin: center;
 }
 
 .form-container {
@@ -61,17 +63,17 @@ form {
 
 h1 {
     color: var(--grad-clr1);
-    margin: 0; /* Remove margin to keep text on one line */
+    margin: 0px; /* Remove margin to keep text on one line */
 }
 
 span {
-    font-size: 12px;
-    margin-top: 10px; /* Increased space above the span */
+    font-size: 20px;
+    margin-top: 20px; /* Increased space above the span */
 }
 
 .infield {
     position: relative;
-    margin: 12px 0; /* Increased vertical spacing */
+    margin: 15px 0; /* Increased vertical spacing */
     width: 100%;
 }
 
@@ -103,7 +105,7 @@ a {
     color: #333;
     font-size: 14px;
     text-decoration: none;
-    margin: 20px 0; /* Increased vertical spacing */
+    margin: 30px 0; /* Increased vertical spacing */
 }
 
 a.forgot {
