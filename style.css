@@ -23,7 +23,7 @@ body {
 
 header {
     width: 100%;
-    background: var(--grad-clr1); /* Background color same as the gradient color */
+    background: var(--grad-clr1); /* Ensure a dark background */
     text-align: center;
     padding: 20px 0;
     position: fixed; /* Fixed positioning to stay at the top */
@@ -31,10 +31,9 @@ header {
     left: 0;
     z-index: 100; /* Ensure header is above the container */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
-    font-family: "SUSE", sans-serif;
-    color: rgba(0, 0, 0, 0.2);
-    margin-top: 40px;
-
+    font-family: 'SUSE', sans-serif; /* Ensure font is correctly loaded */
+    color: #fff; /* Ensure the text is visible */
+    margin-top: 0; /* Remove margin to prevent any overlap */
 }
 
 header h1 {
@@ -42,8 +41,9 @@ header h1 {
     font-size: 2rem; /* Adjust size as needed */
     text-transform: uppercase;
     line-height: 1.2; /* Ensure enough space for readability */
-    color: #fff;
+    color: #fff; /* Ensure the text is visible */
 }
+
 
 
 .container {
@@ -252,3 +252,10 @@ p {
 .container.right-panel-active .overlay-panel.overlay-left {
     transform: translateX(0); /* Resets the left panel position */
 }
+@media (max-width: 768px) { /* Adjust the breakpoint as needed */
+    header {
+        padding: 15px 0; /* Adjust padding for smaller screens */
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+}
+
