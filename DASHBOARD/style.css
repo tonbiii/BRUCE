@@ -51,7 +51,7 @@ header h1 {
 
 .info-section {
     margin-top: 100px; /* Adjusted to be below the header */
-    width: 50%; /* Adjusted to match container width */
+    width: 90%; /* Adjusted to match container width */
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -83,7 +83,7 @@ header h1 {
 
 .container {
     margin-top: 30px; /* Space between info-section and container */
-    width: 40%; /* Reduced width by 30% (from 70% to 50%) */
+    width: 80%; /* Reduced width by 30% (from 70% to 50%) */
     background: #fff;
     border-radius: 10px; /* Slightly smaller border radius */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for visibility */
