@@ -23,12 +23,12 @@ body {
 .container {
     position: relative;
     width: 650px; /* Original width */
-    height: 700px; /* Original height */
+    height: 750px; /* Original height */
     background-color: #fff;
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
     overflow: hidden;
-    transform: scale(0.6); /* Shrink by 50% */
+    transform: scale(0.5); /* Shrink by 50% */
     transform-origin: center;
 }
 
@@ -82,7 +82,7 @@ input {
     background-color: #f3f3f3;
     border: none;
     outline: none;
-    font-size: 16px; /* Increased font size for better readability */
+    font-size: 23px; /* Increased font size for better readability */
 }
 
 label {
