@@ -13,24 +13,26 @@
 }
 
 body {
-    min-height: 100vh; /* Ensure the body takes at least the full height */
+    min-height: 100vh;
     background: #f6f5f7;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
-    padding: 20px; /* Add padding to ensure content doesn't touch screen edges */
+    padding: 20px;
 }
 
 .container {
     position: relative;
-    width: 850px; /* Default width for large screens */
-    height: 500px;
+    width: 800px; /* Original width */
+    height: 800px; /* Original height */
     background-color: #fff;
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
     overflow: hidden;
     transition: width 0.3s ease, height 0.3s ease;
+    transform: scale(0.6); /* Shrink by 30% */
+    transform-origin: center;
 }
 
 .form-container {
@@ -65,11 +67,13 @@ form {
 h1 {
     color: var(--grad-clr1);
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.74rem; /* Reduced by 20% from the previous size */
+    line-height: 1.76; /* Reduced by 30% from the increased value */
 }
 
 span {
-    font-size: 0.75rem;
+    font-size: 0.96rem; /* Reduced by 20% from the previous size */
+    line-height: 1.58; /* Reduced by 30% from the increased value */
     margin-top: 10px;
 }
 
@@ -85,7 +89,8 @@ input {
     background-color: #f3f3f3;
     border: none;
     outline: none;
-    font-size: 1rem;
+    font-size: 1.27rem; /* Reduced by 20% from the previous size */
+    line-height: 1.58; /* Reduced by 30% from the increased value */
 }
 
 label {
@@ -105,7 +110,8 @@ input:focus ~ label {
 
 a {
     color: #333;
-    font-size: 0.875rem;
+    font-size: 0.96rem; /* Reduced by 20% from the previous size */
+    line-height: 1.58; /* Reduced by 30% from the increased value */
     text-decoration: none;
     margin: 20px 0;
 }
@@ -120,9 +126,10 @@ button {
     border: 1px solid var(--grad-clr1);
     background: var(--grad-clr2);
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.27rem; /* Reduced by 20% from the previous size */
+    line-height: 1.58; /* Reduced by 30% from the increased value */
     font-weight: bold;
-    padding: 14px 50px;
+    padding: 14px 40px;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
@@ -183,15 +190,16 @@ button {
 .overlay-panel h1 {
     color: #fff;
     margin-bottom: 20px;
-    font-size: 1.5rem;
+    font-size: 1.74rem; /* Reduced by 20% from the previous size */
+    line-height: 1.76; /* Reduced by 30% from the increased value */
 }
 
 p {
-    font-size: 1rem;
+    font-size: 1.27rem; /* Reduced by 20% from the previous size */
     font-weight: 300;
-    line-height: 1.5;
+    line-height: 1.58; /* Reduced by 30% from the increased value */
     letter-spacing: 0.5px;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 #signIn, #signUp {
@@ -231,68 +239,8 @@ p {
 /* Mobile Styles */
 @media (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 72%;
         height: auto;
         box-shadow: 10px 15px 30px #5557;
-    }
-
-    .form-container {
-        padding: 0 20px;
-    }
-
-    h1, .overlay-panel h1 {
-        font-size: 1.2rem;
-    }
-
-    input {
-        font-size: 0.875rem;
-    }
-
-    button {
-        font-size: 0.875rem;
-        padding: 12px 30px;
-    }
-
-    p {
-        font-size: 0.875rem;
-        margin: 20px 0;
-    }
-
-    a {
-        font-size: 0.75rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        width: 100%;
-        padding: 20px;
-        height: auto;
-    }
-
-    .form-container {
-        padding: 0 15px;
-    }
-
-    h1, .overlay-panel h1 {
-        font-size: 1rem;
-    }
-
-    input {
-        font-size: 0.75rem;
-    }
-
-    button {
-        font-size: 0.75rem;
-        padding: 10px 25px;
-    }
-
-    p {
-        font-size: 0.75rem;
-        margin: 15px 0;
-    }
-
-    a {
-        font-size: 0.65rem;
     }
 }
