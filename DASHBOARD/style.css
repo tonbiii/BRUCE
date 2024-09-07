@@ -50,9 +50,8 @@ header h1 {
 }
 
 .info-section {
-    margin-top: 80px; /* Adjusted to be below the header */
+    margin-top: 100px; /* Adjusted to be below the header */
     width: 50%; /* Adjusted to match container width */
-    max-width: 420px; /* Adjusted to match container max-width */
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -62,7 +61,7 @@ header h1 {
 }
 
 .info-section h2 {
-    margin-top: 80px;
+    margin-top: 120px;
     margin-bottom: 15px;
     font-size: 1.25rem;
     color: var(--primary-bg);
@@ -85,7 +84,6 @@ header h1 {
 .container {
     margin-top: 30px; /* Space between info-section and container */
     width: 40%; /* Reduced width by 30% (from 70% to 50%) */
-    max-width: 400px; /* Reduced max-width by 30% (from 600px to 420px) */
     background: #fff;
     border-radius: 10px; /* Slightly smaller border radius */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for visibility */
