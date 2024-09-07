@@ -239,8 +239,86 @@ p {
 /* Mobile Styles */
 @media (max-width: 768px) {
     .container {
-        width: 72%;
+        width: 90%; /* Adjusted for better responsiveness */
         height: auto;
         box-shadow: 10px 15px 30px #5557;
+    }
+
+    .form-container {
+        padding: 0 20px;
+    }
+
+    h1 {
+        font-size: 1.4rem; /* Adjusted for mobile */
+        line-height: 1.5; /* Adjusted for mobile */
+    }
+
+    span {
+        font-size: 0.84rem; /* Adjusted for mobile */
+        line-height: 1.5; /* Adjusted for mobile */
+    }
+
+    input {
+        font-size: 1.02rem; /* Adjusted for mobile */
+        line-height: 1.5; /* Adjusted for mobile */
+    }
+
+    a {
+        font-size: 0.84rem; /* Adjusted for mobile */
+        line-height: 1.5; /* Adjusted for mobile */
+    }
+
+    button {
+        font-size: 1.02rem; /* Adjusted for mobile */
+        line-height: 1.5; /* Adjusted for mobile */
+        padding: 12px 30px;
+    }
+
+    p {
+        font-size: 1.02rem; /* Adjusted for mobile */
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+        height: auto;
+    }
+
+    .form-container {
+        padding: 0 15px;
+    }
+
+    h1 {
+        font-size: 1.2rem; /* Adjusted for smaller mobile devices */
+        line-height: 1.4; /* Adjusted for smaller mobile devices */
+    }
+
+    span {
+        font-size: 0.75rem; /* Adjusted for smaller mobile devices */
+        line-height: 1.4; /* Adjusted for smaller mobile devices */
+    }
+
+    input {
+        font-size: 0.9rem; /* Adjusted for smaller mobile devices */
+        line-height: 1.4; /* Adjusted for smaller mobile devices */
+    }
+
+    a {
+        font-size: 0.75rem; /* Adjusted for smaller mobile devices */
+        line-height: 1.4; /* Adjusted for smaller mobile devices */
+    }
+
+    button {
+        font-size: 0.9rem; /* Adjusted for smaller mobile devices */
+        line-height: 1.4; /* Adjusted for smaller mobile devices */
+        padding: 10px 20px;
+    }
+
+    p {
+        font-size: 0.9rem; /* Adjusted for smaller mobile devices */
+        margin: 10px 0;
     }
 }
