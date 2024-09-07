@@ -22,13 +22,13 @@ body {
 
 .container {
     position: relative;
-    width: 850px; /* Original width */
+    width: 650px; /* Original width */
     height: 700px; /* Original height */
     background-color: #fff;
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
     overflow: hidden;
-    transform: scale(0.5); /* Shrink by 50% */
+    transform: scale(0.6); /* Shrink by 50% */
     transform-origin: center;
 }
 
@@ -59,22 +59,21 @@ form {
     align-items: center;
     justify-content: center;
     padding: 0 50px;
+    width: 110%;
 }
 
 h1 {
     color: var(--grad-clr1);
     margin: 0px; /* Remove margin to keep text on one line */
+    margin-bottom: 30px;
 }
 
-span {
-    font-size: 20px;
-    margin-top: 20px; /* Increased space above the span */
-}
+
 
 .infield {
     position: relative;
     margin: 15px 0; /* Increased vertical spacing */
-    width: 100%;
+    width: 150%;
 }
 
 input {
@@ -115,7 +114,7 @@ a.forgot {
 
 button {
     border-radius: 20px;
-    border: 1px solid var(--grad-clr1);
+    border: 2px solid var(--grad-clr1);
     background: var(--grad-clr2);
     color: #fff;
     font-size: 14px; /* Slightly increased font size */
