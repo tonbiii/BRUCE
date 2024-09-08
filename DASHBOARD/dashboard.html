@@ -8,7 +8,7 @@
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSS stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 
@@ -18,6 +18,7 @@
 
     <div class="info-section">
         <h2>Account Information</h2>
+        <p><strong>Username:</strong> <span id="username">Trader123</span></p>
         <p><strong>MT4 Account ID:</strong> <span id="mt4-account-id">123456789</span></p>
         <p><strong>MT4 Broker Server:</strong> <span id="mt4-broker-server">BrokerServerName</span></p>
     </div>
@@ -27,7 +28,7 @@
             <h2>Update Settings</h2>
             <div class="input-group">
                 <label for="lotSize">Lot Size</label>
-                <input type="number" id="lotSize" name="lotSize" placeholder="1.00" step="0.01">
+                <input type="text" id="lotSize" name="lotSize" placeholder="1.00" oninput="validateLotSize(this)">
             </div>
             <div class="input-group">
                 <label for="stopLoss">Stop Loss (Points)</label>
@@ -39,30 +40,63 @@
             </div>
             <div class="input-group">
                 <label for="timeFrame">Time Frame</label>
-                <input type="text" id="timeFrame" name="timeFrame" placeholder="Enter Time Frame">
+                <select id="timeFrame" name="timeFrame">
+                    <option value="M1">M1 (1 Minute)</option>
+                    <option value="M5">M5 (5 Minutes)</option>
+                    <option value="M15">M15 (15 Minutes)</option>
+                    <option value="M30">M30 (30 Minutes)</option>
+                    <option value="H1">H1 (1 Hour)</option>
+                    <option value="H4">H4 (4 Hours)</option>
+                    <option value="D1">D1 (1 Day)</option>
+                    <option value="W1">W1 (1 Week)</option>
+                    <option value="MN">MN (1 Month)</option>
+                </select>
             </div>
-            <button class="update-button" onclick="updateSettings()">Update Settings</button>
+            <button class="update-button" onclick="addTrade()">Add Trade</button>
         </div>
 
         <div class="active-settings">
             <h2>Active Settings</h2>
-            <ul class="settings-list">
-                <li class="setting-item"><strong>Lot Size:</strong> <span id="active-lot-size">1.00</span></li>
-                <li class="setting-item"><strong>Stop Loss:</strong> <span id="active-stop-loss">10</span></li>
-                <li class="setting-item"><strong>Risk to Reward:</strong> <span id="active-rr">2</span></li>
-                <li class="setting-item"><strong>Time Frame:</strong> <span id="active-time-frame">Enter Time Frame</span></li>
+            <ul class="settings-list" id="settingsList">
+                <!-- Dynamic trade settings will be added here -->
             </ul>
         </div>
     </div>
 
     <!-- JavaScript code -->
     <script>
-        function updateSettings() {
-            // Update active settings section with input values
-            document.getElementById('active-lot-size').innerText = document.getElementById('lotSize').value;
-            document.getElementById('active-stop-loss').innerText = document.getElementById('stopLoss').value;
-            document.getElementById('active-rr').innerText = document.getElementById('rr').value;
-            document.getElementById('active-time-frame').innerText = document.getElementById('timeFrame').value;
+        let tradeCount = 0; // Counter for trades
+
+        // Function to validate Lot Size input (up to 2 decimal places, only numbers and a dot)
+        function validateLotSize(input) {
+            const value = input.value;
+            const regex = /^\d*\.?\d{0,2}$/; // Allows up to 2 decimal places
+            if (!regex.test(value)) {
+                input.value = value.slice(0, -1); // Remove last character if invalid
+            }
+        }
+
+        function addTrade() {
+            // Get input values
+            const lotSize = document.getElementById('lotSize').value;
+            const stopLoss = document.getElementById('stopLoss').value;
+            const rr = document.getElementById('rr').value;
+            const timeFrame = document.getElementById('timeFrame').value;
+
+            // Increment trade count
+            tradeCount++;
+
+            // Create a new trade entry
+            const tradeItem = document.createElement('li');
+            tradeItem.classList.add('setting-item');
+            tradeItem.innerHTML = `<strong>Trade ${tradeCount}:</strong>
+                Lot Size: <span>${lotSize}</span>,
+                Stop Loss: <span>${stopLoss}</span>,
+                Risk to Reward: <span>${rr}</span>,
+                Time Frame: <span>${timeFrame}</span>`;
+
+            // Add new trade entry to the list
+            document.getElementById('settingsList').appendChild(tradeItem);
         }
     </script>
 

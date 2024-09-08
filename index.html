@@ -101,62 +101,64 @@
             container.classList.remove('right-panel-active');
         });
 
-        // Handle sign-up form submission without page reload
-        document.getElementById('signUpForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('signup-username').value;
-            const accountId = document.getElementById('signup-account-id').value;
-            const server = document.getElementById('signup-server').value;
-            const password = document.getElementById('signup-password').value;
+// Handle sign-up form submission without page reload
+document.getElementById('signUpForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
 
-            const response = await fetch('/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username,
-                    mt4AccountId: accountId,
-                    mt4Server: server,
-                    password
-                })
-            });
+    const username = document.getElementById('signup-username').value;
+    const accountId = document.getElementById('signup-account-id').value;
+    const server = document.getElementById('signup-server').value;
+    const password = document.getElementById('signup-password').value;
 
-            const result = await response.json();
-            if (response.ok) {
-                alert('Account created successfully');
-            } else {
-                alert('Failed to create account: ' + (result.message || 'Unknown error'));
-            }
-        });
+    const response = await fetch('register.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            mt4AccountId: accountId,
+            mt4Server: server,
+            password
+        })
+    });
 
-        // Handle sign-in form submission without page reload
-        document.getElementById('signInForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('signin-username').value;
-            const password = document.getElementById('signin-password').value;
+    const result = await response.json();
+    if (response.ok) {
+        alert('Account created successfully');
+    } else {
+        alert('Failed to create account: ' + (result.message || 'Unknown error'));
+    }
+});
 
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username,
-                    password
-                })
-            });
+// Handle sign-in form submission without page reload
+document.getElementById('signInForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
 
-            const result = await response.json();
-            if (response.ok) {
-                alert('Login successful');
-                localStorage.setItem('token', result.token); // Save token for authenticated requests
-            } else {
-                alert('Failed to login: ' + (result.message || 'Unknown error'));
-            }
-        });
+    const username = document.getElementById('signin-username').value;
+    const password = document.getElementById('signin-password').value;
+
+    const response = await fetch('login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+        alert('Login successful');
+        localStorage.setItem('token', result.token); // Save token for authenticated requests
+        window.location.href = 'dashboard.html'; // Redirect to dashboard
+    } else {
+        alert('Failed to login: ' + (result.message || 'Unknown error'));
+    }
+});
+
 
         // Toggle password visibility for sign-up
         const toggleSignupPassword = document.getElementById('toggleSignupPassword');
