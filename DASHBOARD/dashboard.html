@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-
     <header>
         <h1>WELCOME TO YOUR EA DASHBOARD</h1>
     </header>
@@ -26,6 +25,25 @@
     <div class="container" id="container">
         <div class="inputs-section">
             <h2>Update Settings</h2>
+            
+            <!-- Instrument Group Selection -->
+            <div class="input-group">
+                <label for="instrumentGroup">Instrument Group</label>
+                <select id="instrumentGroup" name="instrumentGroup" onchange="populateInstruments()">
+                    <option value="">--Select Group--</option>
+                    <option value="Forex">Forex</option>
+                    <option value="Metals">Metals</option>
+                </select>
+            </div>
+            
+            <!-- Instrument Selection -->
+            <div class="input-group">
+                <label for="instrumentSelect">Instrument</label>
+                <select id="instrumentSelect" name="instrumentSelect">
+                    <option value="">--Select Instrument--</option>
+                </select>
+            </div>
+            
             <div class="input-group">
                 <label for="lotSize">Lot Size</label>
                 <input type="text" id="lotSize" name="lotSize" placeholder="1.00" oninput="validateLotSize(this)">
@@ -67,6 +85,30 @@
     <script>
         let tradeCount = 0; // Counter for trades
 
+        // Function to populate the instruments dropdown based on selected group
+        function populateInstruments() {
+            const groupSelect = document.getElementById('instrumentGroup').value;
+            const instrumentSelect = document.getElementById('instrumentSelect');
+            
+            // Clear previous options
+            instrumentSelect.innerHTML = '<option value="">--Select Instrument--</option>';
+            
+            // Fetch instruments from PHP script based on selected group
+            if (groupSelect) {
+                fetch(`getInstruments.php?group=${groupSelect}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(instrument => {
+                            const option = document.createElement('option');
+                            option.value = instrument;
+                            option.text = instrument;
+                            instrumentSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching instruments:', error));
+            }
+        }
+
         // Function to validate Lot Size input (up to 2 decimal places, only numbers and a dot)
         function validateLotSize(input) {
             const value = input.value;
@@ -82,6 +124,7 @@
             const stopLoss = document.getElementById('stopLoss').value;
             const rr = document.getElementById('rr').value;
             const timeFrame = document.getElementById('timeFrame').value;
+            const instrument = document.getElementById('instrumentSelect').value;
 
             // Increment trade count
             tradeCount++;
@@ -90,6 +133,7 @@
             const tradeItem = document.createElement('li');
             tradeItem.classList.add('setting-item');
             tradeItem.innerHTML = `<strong>Trade ${tradeCount}:</strong>
+                Instrument: <span>${instrument}</span>,
                 Lot Size: <span>${lotSize}</span>,
                 Stop Loss: <span>${stopLoss}</span>,
                 Risk to Reward: <span>${rr}</span>,
