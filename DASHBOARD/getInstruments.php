@@ -25,7 +25,7 @@ if ($group === 'Forex') {
     $directory = '';
 }
 
-if ($directory) {
+if ($directory && is_dir($directory)) {
     echo json_encode(getInstrumentNames($directory));
 } else {
     echo json_encode([]);
