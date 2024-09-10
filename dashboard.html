@@ -77,7 +77,7 @@
             color: var(--hover-text);
         }
 
-
+  
     </style>
 </head>
 <body>
@@ -139,13 +139,13 @@
                     <option value="MN">MN (1 Month)</option>
                 </select>
             </div>
-            <button class="update-button" onclick="openConfirmationModal()">Add Trade</button>
+            <button class="update-button" onclick="openConfirmationModal()">Add Chart</button>
         </div>
 
         <div class="active-settings">
-            <h2>Active Settings</h2>
+            <h2>Active Charts</h2>
             <ul class="settings-list" id="settingsList">
-                <!-- Dynamic trade settings will be added here -->
+                <!-- Dynamic chart settings will be added here -->
             </ul>
         </div>
     </div>
@@ -153,10 +153,10 @@
     <!-- Confirmation Modal -->
     <div class="modal-background" id="confirmationModal">
         <div class="modal-box">
-            <h3>Confirm Trade</h3>
-            <p>Are you sure you want to add this trade?</p>
+            <h3>Confirm Settings</h3>
+            <p>Are you sure you want to add this Chart?</p>
             <div class="modal-buttons">
-                <button class="confirm-button" onclick="confirmAddTrade()">Confirm</button>
+                <button class="confirm-button" onclick="confirmAddChart()">Confirm</button>
                 <button class="cancel-button" onclick="closeConfirmationModal()">Cancel</button>
             </div>
         </div>
@@ -164,7 +164,7 @@
 
     <!-- JavaScript code -->
     <script>
-        let tradeCount = 0; // Counter for trades
+        let chartCount = 0; // Counter for charts
 
         // Function to populate the instruments dropdown based on selected group
         function populateInstruments() {
@@ -265,33 +265,43 @@
             document.getElementById('confirmationModal').style.display = 'none';
         }
 
-        // Function to add trade after confirmation
-        function confirmAddTrade() {
+        // Function to add chart after confirmation
+        function confirmAddChart() {
             closeConfirmationModal(); // Close modal
 
-            // Increment trade count
-            tradeCount++;
+            // Increment chart count
+            chartCount++;
 
-            // Create a new trade entry
+            // Create a new chart entry
             const instrument = document.getElementById('instrumentSearch').value;
             const lotSize = document.getElementById('lotSize').value;
             const stopLoss = document.getElementById('stopLoss').value;
             const rr = document.getElementById('rr').value;
             const timeFrame = document.getElementById('timeFrame').value;
 
-            const tradeItem = document.createElement('li');
-            tradeItem.classList.add('setting-item');
-            tradeItem.innerHTML = `<strong>Trade ${tradeCount}:</strong>
+            const chartItem = document.createElement('li');
+            chartItem.classList.add('setting-item');
+            chartItem.innerHTML = `<strong>Chart ${chartCount}:</strong>
                 Instrument: <span>${instrument}</span>,
                 Lot Size: <span>${lotSize}</span>,
                 Stop Loss: <span>${stopLoss}</span>,
                 Risk to Reward: <span>${rr}</span>,
-                Time Frame: <span>${timeFrame}</span>`;
+                Time Frame: <span>${timeFrame}</span>
+                <button class="remove-button" onclick="removeChart(this)">Remove</button>`;
 
-            document.getElementById('settingsList').appendChild(tradeItem);
+            document.getElementById('settingsList').appendChild(chartItem);
 
-            // Clear inputs after adding the trade (optional)
+            // Clear inputs after adding the chart (optional)
             clearForm();
+        }
+
+        // Function to remove a chart entry
+        function removeChart(button) {
+            const chartItem = button.parentNode;
+            chartItem.parentNode.removeChild(chartItem);
+
+            // Optionally, update chart count or perform other actions
+            chartCount--;
         }
 
         // Function to display inline error messages
@@ -323,7 +333,7 @@
             });
         }
 
-        // Optional: Function to clear the form after adding a trade
+        // Optional: Function to clear the form after adding a chart
         function clearForm() {
             document.getElementById('lotSize').value = '';
             document.getElementById('stopLoss').value = '';

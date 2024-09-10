@@ -43,6 +43,10 @@
                     <label></label>
                 </div>
                 <div class="infield">
+                    <input type="password" placeholder="MT4 Account Password" name="mt4-account-password" id="signup-account-password" required/>
+                    <label></label>
+                </div>
+                <div class="infield">
                     <input type="text" placeholder="MT4 Broker Server" name="mt4-server" id="signup-server" required/>
                     <label></label>
                 </div>
@@ -101,64 +105,65 @@
             container.classList.remove('right-panel-active');
         });
 
-// Handle sign-up form submission without page reload
-document.getElementById('signUpForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
+        // Handle sign-up form submission without page reload
+        document.getElementById('signUpForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
 
-    const username = document.getElementById('signup-username').value;
-    const accountId = document.getElementById('signup-account-id').value;
-    const server = document.getElementById('signup-server').value;
-    const password = document.getElementById('signup-password').value;
+            const username = document.getElementById('signup-username').value;
+            const accountId = document.getElementById('signup-account-id').value;
+            const accountPassword = document.getElementById('signup-account-password').value;
+            const server = document.getElementById('signup-server').value;
+            const password = document.getElementById('signup-password').value;
 
-    const response = await fetch('register.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username,
-            mt4AccountId: accountId,
-            mt4Server: server,
-            password
-        })
-    });
+            const response = await fetch('register.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    mt4AccountId: accountId,
+                    mt4AccountPassword: accountPassword,
+                    mt4Server: server,
+                    password
+                })
+            });
 
-    const result = await response.json();
-    if (response.ok) {
-        alert('Account created successfully');
-    } else {
-        alert('Failed to create account: ' + (result.message || 'Unknown error'));
-    }
-});
+            const result = await response.json();
+            if (response.ok) {
+                alert('Account created successfully');
+            } else {
+                alert('Failed to create account: ' + (result.message || 'Unknown error'));
+            }
+        });
 
-// Handle sign-in form submission without page reload
-document.getElementById('signInForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
+        // Handle sign-in form submission without page reload
+        document.getElementById('signInForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
 
-    const username = document.getElementById('signin-username').value;
-    const password = document.getElementById('signin-password').value;
+            const username = document.getElementById('signin-username').value;
+            const password = document.getElementById('signin-password').value;
 
-    const response = await fetch('login.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username,
-            password
-        })
-    });
+            const response = await fetch('login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            });
 
-    const result = await response.json();
-    if (response.ok) {
-        alert('Login successful');
-        localStorage.setItem('token', result.token); // Save token for authenticated requests
-        window.location.href = 'dashboard.html'; // Redirect to dashboard
-    } else {
-        alert('Failed to login: ' + (result.message || 'Unknown error'));
-    }
-});
-
+            const result = await response.json();
+            if (response.ok) {
+                alert('Login successful');
+                localStorage.setItem('token', result.token); // Save token for authenticated requests
+                window.location.href = 'dashboard.html'; // Redirect to dashboard
+            } else {
+                alert('Failed to login: ' + (result.message || 'Unknown error'));
+            }
+        });
 
         // Toggle password visibility for sign-up
         const toggleSignupPassword = document.getElementById('toggleSignupPassword');
@@ -181,8 +186,6 @@ document.getElementById('signInForm').addEventListener('submit', async function 
                 this.classList.toggle('fa-eye-slash');
             });
         }
-
-
     </script>
 </body>
 </html>

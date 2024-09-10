@@ -51,7 +51,7 @@ header h1 {
 }
 
 .info-section {
-    margin-top: 300px; /* Adjusted to be below the header */
+    margin-top: 350px; /* Adjusted to be below the header */
     width: 80%; /* Adjusted to match container width */
     background: #fff;
     border-radius: 10px;
@@ -332,3 +332,19 @@ select:focus {
     background-color: #141E30;
     color: white;
 }
+
+      /* Remove button styling */
+      .remove-button {
+        background-color: #141E30;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 0.9rem;
+    }
+
+    .remove-button:hover {
+        background-color: #141E30;
+    }
