@@ -76,8 +76,6 @@
             background-color: var(--hover-bg);
             color: var(--hover-text);
         }
-
-  
     </style>
 </head>
 <body>
@@ -87,9 +85,9 @@
 
     <div class="info-section">
         <h3>Account Information</h3>
-        <p><strong>Username:</strong> <span id="username">Trader123</span></p>
-        <p><strong>MT4 Account ID:</strong> <span id="mt4-account-id">123456789</span></p>
-        <p><strong>MT4 Broker Server:</strong> <span id="mt4-broker-server">BrokerServerName</span></p>
+        <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+        <p><strong>MT4 Account ID:</strong> <span id="mt4-account-id">Loading...</span></p>
+        <p><strong>MT4 Broker Server:</strong> <span id="mt4-broker-server">Loading...</span></p>
         
         <!-- Update Account Information Button -->
         <button onclick="window.location.href='update_account_information.html'" class="update-info-button">Update Account Information</button>
@@ -170,6 +168,26 @@
 
     <!-- JavaScript code -->
     <script>
+        // Function to fetch user data and populate account information
+        function loadUserData() {
+            fetch('getUserData.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('username').textContent = data.username;
+                        document.getElementById('mt4-account-id').textContent = data.mt4_account_id;
+                        document.getElementById('mt4-broker-server').textContent = data.mt4_server;
+                    } else {
+                        alert('Error fetching user data: ' + data.message);
+                        window.location.href = 'index.html'; // Redirect to login page if there's an error
+                    }
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+        }
+
+        // Load user data when page is loaded
+        document.addEventListener('DOMContentLoaded', loadUserData);
+
         let chartCount = 0; // Counter for charts
 
         // Function to populate the instruments dropdown based on selected group

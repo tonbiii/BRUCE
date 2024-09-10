@@ -3,14 +3,17 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Start the session
+session_start();
+
 // Database credentials
 $host = "localhost";
 $dbname = "euporiaf_my_users_db"; // Change this to your actual database name
-$username = "euporiaf_MT4EA"; // Change this to your actual database username
-$password = "mt4_EA##"; // Change this to your actual database password
+$dbUsername = "euporiaf_MT4EA"; // Change this to your actual database username
+$dbPassword = "mt4_EA##"; // Change this to your actual database password
 
 // Create connection
-$conn = new mysqli($host, $username, $password, $dbname);
+$conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
@@ -35,6 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->fetch();
 
     if ($hashedPassword && verifyPassword($password, $hashedPassword)) {
+        // Set session variable for logged-in user
+        $_SESSION['username'] = $username;
+
         echo json_encode(["success" => true, "message" => "Login successful"]);
     } else {
         echo json_encode(["success" => false, "message" => "Invalid username or password"]);
