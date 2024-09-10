@@ -267,7 +267,48 @@ p {
     font-size: 1.2rem;
 }
 
+/* Main select box styling */
+select {
+    width: 100%;
+    padding: 14px 15px;
+    background-color: #f3f3f3;
+    border: none;
+    outline: none;
+    font-size: 25px; /* Keep consistent font size */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    cursor: pointer;
+}
 
+/* Reduce size of the dropdown list that appears */
+select option {
+    font-size: 20px; /* Same font size as other inputs */
+    padding: 8px 12px; /* Smaller padding for options */
+}
+
+/* Limit the height of the dropdown box and enable scrolling if necessary */
+select {
+    max-height: 150px; /* Adjust to control the visible height */
+    overflow-y: auto; /* Enable scrolling if there are many options */
+}
+
+/* Hide the default placeholder from being selectable */
+select option[disabled] {
+    color: #888; /* Placeholder color */
+    display: none; /* Prevents the placeholder from appearing in the dropdown list */
+}
+
+/* Reduce the size of the dropdown list box that appears */
+select:focus option {
+    max-height: 100px; /* Adjust height to reduce the visible dropdown list */
+    overflow-y: auto; /* Allows scrolling if necessary */
+}
 
 
     

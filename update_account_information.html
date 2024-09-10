@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Account Information</title>
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #fff; /* White background */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #141E30;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-group label {
+            margin-bottom: 5px;
+            font-size: 1rem;
+            color: #141E30;
+            font-weight: 500;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="password"],
+        .input-group input[type="number"],
+        .input-group select {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #141E30;
+            border-radius: 6px;
+            background-color: #f3f3f3;
+            font-size: 1rem;
+            color: #141E30;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #243B55;
+            outline: none;
+        }
+
+        .input-group .error-message {
+            color: red;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            background-color: #243B55;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-group button:hover {
+            background-color: #141E30;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Your Account Information</h1>
+        <form id="updateForm" action="javascript:void(0);">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" required />
+                <div class="error-message" id="username-error">Invalid username</div>
+            </div>
+            <div class="input-group">
+                <label for="mt4-account-id">MT4 Account ID</label>
+                <input type="text" id="mt4-account-id" name="mt4-account-id" placeholder="MT4 Account ID" required />
+            </div>
+            <div class="input-group">
+                <label for="mt4-account-password">MT4 Account Password</label>
+                <input type="password" id="mt4-account-password" name="mt4-account-password" placeholder="MT4 Account Password" required />
+            </div>
+            <div class="input-group">
+                <label for="mt4-server">MT4 Broker Server</label>
+                <input type="text" id="mt4-server" name="mt4-server" placeholder="MT4 Broker Server" required />
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required />
+                <div class="error-message" id="password-error">Invalid password</div>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="window.location.href='index.html'">Update Information</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

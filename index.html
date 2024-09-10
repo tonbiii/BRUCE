@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in || Sign up Form</title>
-    <!-- font awesome icons -->
+    <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- css stylesheet -->
+    <!-- CSS stylesheet -->
     <link rel="stylesheet" href="style.css">
     <style>
         .password-field {
@@ -23,6 +23,14 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
+        .input-error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -32,34 +40,43 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form id="signUpForm" action="javascript:void(0);">
+            <form id="signUpForm" action="register.php" method="POST">
                 <h1>Create Account</h1>
                 <div class="infield">
                     <input type="text" placeholder="Username" name="username" id="signup-username" required/>
                     <label></label>
+                    <div class="error-message" id="signup-username-error">Username already in use</div>
                 </div>
                 <div class="infield">
                     <input type="text" placeholder="MT4 Account ID" name="mt4-account-id" id="signup-account-id" required/>
                     <label></label>
                 </div>
-                <div class="infield">
+                <div class="infield password-field">
                     <input type="password" placeholder="MT4 Account Password" name="mt4-account-password" id="signup-account-password" required/>
+                    <i class="fa fa-eye" id="toggleSignupAccountPassword"></i>
                     <label></label>
                 </div>
+                <!-- Updated MT4 Broker Server dropdown -->
                 <div class="infield">
-                    <input type="text" placeholder="MT4 Broker Server" name="mt4-server" id="signup-server" required/>
+                    <select name="mt4-server" id="signup-server" required>
+                        <option value="" disabled selected>Select MT4 Broker Server</option>
+                        <option value="OctaFX-Real">OctaFX-Real</option>
+                        <option value="Ava-Real 3">Ava-Real 3</option>
+                    </select>
                     <label></label>
                 </div>
+                
                 <div class="infield password-field">
                     <input type="password" placeholder="Password" name="password" id="signup-password" required/>
                     <i class="fa fa-eye" id="toggleSignupPassword"></i>
                     <label></label>
+                    <div class="error-message" id="signup-password-error">Password must be at least 6 characters long and include at least one letter and one number.</div>
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form id="signInForm" action="javascript:void(0);">
+            <form id="signInForm" action="login.php" method="POST">
                 <h1>Sign in</h1>
                 <div class="infield">
                     <input type="text" placeholder="Username" name="username" id="signin-username" required/>
@@ -69,6 +86,7 @@
                     <input type="password" placeholder="Password" name="password" id="signin-password" required/>
                     <i class="fa fa-eye" id="toggleSigninPassword"></i>
                     <label></label>
+                    <div class="error-message" id="signin-error">Invalid login credentials</div>
                 </div>
                 <a href="#" class="forgot">Forgot your password?</a>
                 <button type="submit">Sign In</button>
@@ -90,7 +108,7 @@
         </div>
     </div>
 
-    <!-- js code -->
+    <!-- JS code -->
     <script>
         // Panel switching
         const container = document.getElementById('container');
@@ -105,6 +123,35 @@
             container.classList.remove('right-panel-active');
         });
 
+        // Restrict input to lowercase letters, numbers, and '_'
+        function restrictInput(event) {
+            const validChars = /^[a-z0-9_]*$/;
+            const input = event.target;
+            if (!validChars.test(input.value)) {
+                input.value = input.value.replace(/[^a-z0-9_]/g, '');
+                if (input.id === 'signup-username') {
+                    document.getElementById('signup-username-error').style.display = 'block';
+                    input.classList.add('input-error');
+                }
+            } else {
+                if (input.id === 'signup-username') {
+                    document.getElementById('signup-username-error').style.display = 'none';
+                    input.classList.remove('input-error');
+                }
+            }
+        }
+
+        // Validate password
+        function validatePassword(password) {
+            const hasLetter = /[a-zA-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            return password.length >= 6 && hasLetter && hasNumber;
+        }
+
+        // Apply input restrictions on both sign-up and sign-in forms
+        document.getElementById('signup-username').addEventListener('input', restrictInput);
+        document.getElementById('signin-username').addEventListener('input', restrictInput);
+
         // Handle sign-up form submission without page reload
         document.getElementById('signUpForm').addEventListener('submit', async function (event) {
             event.preventDefault();
@@ -114,26 +161,59 @@
             const accountPassword = document.getElementById('signup-account-password').value;
             const server = document.getElementById('signup-server').value;
             const password = document.getElementById('signup-password').value;
+            const usernameError = document.getElementById('signup-username-error');
+            const passwordError = document.getElementById('signup-password-error');
+
+            let valid = true;
+
+            if (!/^[a-z0-9_]+$/.test(username)) {
+                usernameError.style.display = 'block';
+                document.getElementById('signup-username').classList.add('input-error');
+                valid = false;
+            } else {
+                usernameError.style.display = 'none';
+                document.getElementById('signup-username').classList.remove('input-error');
+            }
+
+            if (!validatePassword(password)) {
+                passwordError.style.display = 'block';
+                document.getElementById('signup-password').classList.add('input-error');
+                valid = false;
+            } else {
+                passwordError.style.display = 'none';
+                document.getElementById('signup-password').classList.remove('input-error');
+            }
+
+            if (!valid) {
+                return;
+            }
 
             const response = await fetch('register.php', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify({
-                    username,
+                body: new URLSearchParams({
+                    username: username,
                     mt4AccountId: accountId,
                     mt4AccountPassword: accountPassword,
                     mt4Server: server,
-                    password
+                    password: password
                 })
             });
 
             const result = await response.json();
-            if (response.ok) {
+            if (result.success) {
                 alert('Account created successfully');
+                // Optionally reset the form here
+                document.getElementById('signUpForm').reset();
             } else {
-                alert('Failed to create account: ' + (result.message || 'Unknown error'));
+                if (result.message && result.message.includes('Username')) {
+                    document.getElementById('signup-username-error').style.display = 'block';
+                    document.getElementById('signup-username').classList.add('input-error');
+                } else {
+                    alert('Failed to create account: ' + (result.message || 'Unknown error'));
+                }
             }
         });
 
@@ -144,24 +224,26 @@
             const username = document.getElementById('signin-username').value;
             const password = document.getElementById('signin-password').value;
 
+            // Clear any previous error message
+            const errorElement = document.getElementById('signin-error');
+            errorElement.style.display = 'none';
+
             const response = await fetch('login.php', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify({
-                    username,
-                    password
+                body: new URLSearchParams({
+                    username: username,
+                    password: password
                 })
             });
 
             const result = await response.json();
-            if (response.ok) {
-                alert('Login successful');
-                localStorage.setItem('token', result.token); // Save token for authenticated requests
+            if (result.success) {
                 window.location.href = 'dashboard.html'; // Redirect to dashboard
             } else {
-                alert('Failed to login: ' + (result.message || 'Unknown error'));
+                errorElement.style.display = 'block';
             }
         });
 
@@ -183,6 +265,17 @@
             toggleSigninPassword.addEventListener('click', function () {
                 const type = signinPassword.getAttribute('type') === 'password' ? 'text' : 'password';
                 signinPassword.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        // Toggle MT4 Account Password visibility for sign-up
+        const toggleSignupAccountPassword = document.getElementById('toggleSignupAccountPassword');
+        const signupAccountPassword = document.getElementById('signup-account-password');
+        if (toggleSignupAccountPassword && signupAccountPassword) {
+            toggleSignupAccountPassword.addEventListener('click', function () {
+                const type = signupAccountPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                signupAccountPassword.setAttribute('type', type);
                 this.classList.toggle('fa-eye-slash');
             });
         }

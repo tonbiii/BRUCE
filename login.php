@@ -1,44 +1,46 @@
 <?php
-// Database connection
-$host = 'localhost';
-$db = 'euporiaf_mt4_users_db'; // Replace with your database name
-$user = 'euporiaf_MT4EA'; // Replace with your database username
-$pass = 'mt4_users_db'; // Replace with your database password
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$conn = new mysqli($host, $user, $pass, $db);
+// Database credentials
+$host = "localhost";
+$dbname = "euporiaf_my_users_db"; // Change this to your actual database name
+$username = "euporiaf_MT4EA"; // Change this to your actual database username
+$password = "mt4_EA##"; // Change this to your actual database password
+
+// Create connection
+$conn = new mysqli($host, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die('Connection failed: ' . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch POST data
-$data = json_decode(file_get_contents('php://input'), true);
-$username = $data['username'];
-$password = $data['password'];
+// Function to verify password
+function verifyPassword($enteredPassword, $storedHashedPassword) {
+    return password_verify($enteredPassword, $storedHashedPassword);
+}
 
-// Retrieve user data
-$sql = "SELECT * FROM users WHERE username = '$username'";
-$result = $conn->query($sql);
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-if ($result->num_rows > 0) {
-    $user = $result->fetch_assoc();
+    // Check if the user exists
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->bind_result($hashedPassword);
+    $stmt->fetch();
 
-    // Debug: Output the stored hashed password
-    error_log("Stored password: " . $user['password']);
-    error_log("Entered password: " . $password);
-
-    // Verify password
-    if (password_verify($password, $user['password'])) {
-        // Success: Return a token (e.g., session token)
-        session_start();
-        $_SESSION['user'] = $user['id']; // Store user session
-        echo json_encode(['status' => 'success', 'token' => session_id()]);
+    if ($hashedPassword && verifyPassword($password, $hashedPassword)) {
+        echo json_encode(["success" => true, "message" => "Login successful"]);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Invalid password']);
+        echo json_encode(["success" => false, "message" => "Invalid username or password"]);
     }
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'User not found']);
+
+    $stmt->close();
 }
 
 $conn->close();

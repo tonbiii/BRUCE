@@ -90,6 +90,9 @@
         <p><strong>Username:</strong> <span id="username">Trader123</span></p>
         <p><strong>MT4 Account ID:</strong> <span id="mt4-account-id">123456789</span></p>
         <p><strong>MT4 Broker Server:</strong> <span id="mt4-broker-server">BrokerServerName</span></p>
+        
+        <!-- Update Account Information Button -->
+        <button onclick="window.location.href='update_account_information.html'" class="update-info-button">Update Account Information</button>
     </div>
 
     <div class="container" id="container">
@@ -149,6 +152,9 @@
             </ul>
         </div>
     </div>
+
+    <!-- Log Out Button -->
+    <button onclick="window.location.href='index.html'" class="logout-button">Log Out</button>
 
     <!-- Confirmation Modal -->
     <div class="modal-background" id="confirmationModal">
@@ -226,123 +232,58 @@
             const rr = document.getElementById('rr').value;
             const timeFrame = document.getElementById('timeFrame').value;
 
-            let hasErrors = false;
-
-            // Validation checks and showing inline errors
-            if (!instrumentGroup) {
-                showError('instrumentGroup', "Please select an Instrument Group.");
-                hasErrors = true;
-            }
-            if (!instrument) {
-                showError('instrumentSearch', "Please select or search for an Instrument.");
-                hasErrors = true;
-            }
-            if (!lotSize) {
-                showError('lotSize', "Please enter a Lot Size.");
-                hasErrors = true;
-            }
-            if (!stopLoss) {
-                showError('stopLoss', "Please enter a Stop Loss value.");
-                hasErrors = true;
-            }
-            if (!rr) {
-                showError('rr', "Please enter a Risk to Reward ratio.");
-                hasErrors = true;
-            }
-            if (!timeFrame) {
-                showError('timeFrame', "Please select a Time Frame.");
-                hasErrors = true;
+            // Validate inputs
+            if (!instrumentGroup || !instrument || !lotSize || !stopLoss || !rr || !timeFrame) {
+                alert("Please fill in all fields.");
+                return;
             }
 
-            // If no errors, show the confirmation modal
-            if (!hasErrors) {
-                document.getElementById('confirmationModal').style.display = 'block';
-            }
+            // All fields are valid, show the modal
+            document.getElementById('confirmationModal').style.display = 'block';
         }
 
-        // Close the modal
-        function closeConfirmationModal() {
-            document.getElementById('confirmationModal').style.display = 'none';
-        }
-
-        // Function to add chart after confirmation
+        // Function to confirm adding the chart and add it to the list
         function confirmAddChart() {
-            closeConfirmationModal(); // Close modal
-
-            // Increment chart count
-            chartCount++;
-
-            // Create a new chart entry
+            const instrumentGroup = document.getElementById('instrumentGroup').value;
             const instrument = document.getElementById('instrumentSearch').value;
             const lotSize = document.getElementById('lotSize').value;
             const stopLoss = document.getElementById('stopLoss').value;
             const rr = document.getElementById('rr').value;
             const timeFrame = document.getElementById('timeFrame').value;
 
-            const chartItem = document.createElement('li');
-            chartItem.classList.add('setting-item');
-            chartItem.innerHTML = `<strong>Chart ${chartCount}:</strong>
-                Instrument: <span>${instrument}</span>,
-                Lot Size: <span>${lotSize}</span>,
-                Stop Loss: <span>${stopLoss}</span>,
-                Risk to Reward: <span>${rr}</span>,
-                Time Frame: <span>${timeFrame}</span>
-                <button class="remove-button" onclick="removeChart(this)">Remove</button>`;
+            // Create a new list item with chart settings
+            const listItem = document.createElement('li');
+            listItem.classList.add('settings-item');
+            listItem.innerHTML = `
+                <strong>Chart ${chartCount + 1}</strong>: ${instrumentGroup} - ${instrument} - Lot Size: ${lotSize} - Stop Loss: ${stopLoss} - Risk to Reward: ${rr} - Time Frame: ${timeFrame}
+                <button class="remove-button" onclick="removeChart(this)">Remove</button>
+            `;
 
-            document.getElementById('settingsList').appendChild(chartItem);
+            // Add list item to the list
+            document.getElementById('settingsList').appendChild(listItem);
 
-            // Clear inputs after adding the chart (optional)
-            clearForm();
+            // Increment chart count
+            chartCount++;
+
+            // Close the modal
+            closeConfirmationModal();
         }
 
-        // Function to remove a chart entry
-        function removeChart(button) {
-            const chartItem = button.parentNode;
-            chartItem.parentNode.removeChild(chartItem);
+        // Function to close the confirmation modal
+        function closeConfirmationModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
 
-            // Optionally, update chart count or perform other actions
+        // Function to remove a chart from the list
+        function removeChart(button) {
+            button.parentElement.remove();
             chartCount--;
         }
 
-        // Function to display inline error messages
-        function showError(elementId, message) {
-            const inputElement = document.getElementById(elementId);
-            inputElement.classList.add('error'); // Add error class to highlight field
-
-            // Create error message element
-            let errorMessage = inputElement.nextElementSibling;
-            if (!errorMessage || !errorMessage.classList.contains('error-message')) {
-                errorMessage = document.createElement('div');
-                errorMessage.className = 'error-message';
-                inputElement.parentNode.appendChild(errorMessage);
-            }
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block'; // Show error message
-        }
-
-        // Function to clear error messages
+        // Function to clear previous errors
         function clearErrors() {
-            const errorMessages = document.querySelectorAll('.error-message');
-            errorMessages.forEach(msg => {
-                msg.style.display = 'none';
-            });
-
-            const errorInputs = document.querySelectorAll('.error');
-            errorInputs.forEach(input => {
-                input.classList.remove('error');
-            });
-        }
-
-        // Optional: Function to clear the form after adding a chart
-        function clearForm() {
-            document.getElementById('lotSize').value = '';
-            document.getElementById('stopLoss').value = '';
-            document.getElementById('rr').value = '';
-            document.getElementById('instrumentSearch').value = '';
-            document.getElementById('instrumentGroup').value = '';
-            document.getElementById('timeFrame').value = 'M1'; // Default to M1
+            // Implement if needed
         }
     </script>
-
 </body>
 </html>
